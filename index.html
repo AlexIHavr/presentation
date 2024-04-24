@@ -1,43 +1,90 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<title>Typescript</title>
+    <title>Typescript</title>
 
-		<link rel="icon" type="image/svg+xml" href="dist/tsIcon.png" />
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/league.css">
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>
-					<section>
-						<img src="dist/tsIcon.png" alt="" width="200px" style="margin-top: -100px">
-						<h2>Typescript</h2>
-						<div>What is it? Why should we use it?</div>
-					</section>
-					<section>
-						<h2>Hello There</h2>
-					</section>
-				</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <link rel="icon" type="image/svg+xml" href="dist/assets/tsIcon.png" />
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/league.css" />
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <section>
+            <img src="dist/assets/tsIcon.png" alt="" width="200px" style="margin-top: -100px" />
+            <h2>TypeScript</h2>
+            <p class="fragment">What is it? Why should we use it?</p>
+          </section>
+          <section>
+            <h3>What is it?</h3>
+            <div class="fragment">
+              <img src="dist/assets/extendsTS.png" alt="" width="250px" />
+              <h4>TypeScript is JavaScript with syntax for types</h4>
+              <p class="fragment">
+                TypeScript is a strongly typed programming language that builds on JavaScript,
+                giving you better tooling at any scale
+              </p>
+            </div>
+          </section>
+          <section>
+            <h3>Why use better TypeScript instead of JavaScript?</h3>
+            <div style="text-align: justify">
+              <p class="fragment">1. Adds static typing to JavaScript to let use auto completion</p>
+              <p class="fragment">
+                2. Simplifies JavaScript code, making it easier to read and debug
+              </p>
+              <p class="fragment">3. Let to catch errors and issues</p>
+              <p class="fragment">4. Improves collaboration</p>
+            </div>
+          </section>
+          <section>
+            <h3>Static Type Checker</h3>
+            <p class="fragment">
+              TypeScript checks a program for errors before execution, and does so based on the
+              kinds of values, making it a static type checker
+            </p>
+            <pre class="fragment">
+              <code class="language-js">
+                const obj = { width: 10, height: 15 }; 
+                const area = obj.width * obj.heigth;
+                /*Property 'heigth' does not exist on type 
+                '{ width: number; height: number; }'. 
+                Did you mean 'height'?*/
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Is everything perfect?</h3>
+            <h4 class="fragment">No, there are some cons:</h4>
+            <div style="text-align: justify">
+              <p class="fragment">1. Not true static typing - it's optional</p>
+              <p class="fragment">2. Need to cover all code with types for correct works</p>
+              <p class="fragment">3. Adds extra time to development and building</p>
+            </div>
+          </section>
+        </section>
+        <section>Slide 2</section>
+      </div>
+    </div>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			Reveal.initialize({
-				hash: true,
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
 </html>
