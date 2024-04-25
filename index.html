@@ -178,6 +178,31 @@
             </pre>
           </section>
           <section>
+            <h3>Type assertions</h3>
+            <p class="fragment">
+              Type assertions enable treating an existing object as a specific type
+            </p>
+            <pre class="fragment">
+              <code class="typescript" data-trim data-line-numbers="1-4|5-13">
+                <script type="text/template">
+                  // fails: Property 'value' does not exist on type 'HTMLElement'
+                  const nameInput = document.getElementById('name-input');
+                  if (nameInput) console.log(nameInput.value)
+
+                  //solution
+                  const nameInput = document.getElementById(
+                    'name-input'
+                  ) as HTMLInputElement;
+                  //or
+                  const nameInput = <HTMLInputElement>document.getElementById(
+                    'name-input'
+                  );
+                  if (nameInput) console.log(nameInput.value);
+                </script>
+              </code>
+            </pre>
+          </section>
+          <section>
             <h3>Utility Types</h3>
             <p class="fragment">
               TypeScript has a large number of types that can help with some common type
@@ -246,7 +271,10 @@
           </section>
           <section>
             <h3>Interfaces</h3>
-            <p class="fragment">Interfaces are similar to type aliases, except they only apply to object types and can extend each other</p>
+            <p class="fragment">
+              Interfaces are similar to type aliases, except they only apply to object types and can
+              extend each other
+            </p>
             <pre class="fragment">
               <code class="typescript">
                 interface Figure {
@@ -262,6 +290,67 @@
                   height: 20,
                   width: 10
                 };
+              </code>
+            </pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Function in TypeScript</h2>
+            <img src="dist/assets/functions.jpg" alt="" width="600px" />
+          </section>
+          <section>
+            <h3>Function signatures</h3>
+            <p class="fragment">
+              TypeScript has a specific syntax for typing function parameters and return values.
+            </p>
+            <pre class="fragment">
+              <code class="typescript" data-trim>
+                function multiply(a: number, b: number): number {
+                  return a * b;
+                }
+                //or
+                const multiply = (a: number, b: number): number => {
+                  return a * b;
+                }
+                
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Function types</h3>
+            <p class="fragment">
+              Function types can be specified separately from functions with type aliases. Also we
+              can use default parameters
+            </p>
+            <pre class="fragment">
+              <code class="typescript" data-trim>
+                type Increaser = (value: number, plus?: number) => number;
+                const increaseFunction: Increaser = (value, plus = 0) => value + plus;
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Generics</h3>
+            <p class="fragment">
+              Generics allow creating 'type variables' that don't need to explicitly define the
+              types that they use
+            </p>
+            <p class="fragment">Generics makes it easier to write reusable code</p>
+            <pre class="fragment">
+              <code class="typescript" data-trim data-line-numbers="1-3|4-7|8-10">
+                <script type="text/template">
+                  //Array is a generic
+                  const names: Array<string> = [];
+
+                  function createTuple<T1, T2>(value1: T1, value2: T2): [T1, T2] {
+                    return [value1, value2];
+                  }
+                  createTuple('hello', 42); 
+
+                  //generic in conditional type 
+                  type GenericOf<T> = T extends string ? 'test' : never;
+                </script>
               </code>
             </pre>
           </section>
