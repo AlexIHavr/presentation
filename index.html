@@ -108,12 +108,12 @@
           </section>
           <section>
             <h3>Type declarations</h3>
-            <p>
+            <p class="fragment">
               They can be specified when declaring variables or TypeScript will know (infer) a type
               automatically
             </p>
             <pre class="fragment">
-              <code class="typescript" data-line-numbers="1-8|9-11|12-18">
+              <code class="typescript" data-trim data-line-numbers="1-8|9-11|12-18">
                 //PRIMITIVES
                 const age: number = 32; //or 
                 const age = 32;
@@ -209,7 +209,7 @@
               manipulation, referred to as utility types
             </p>
             <pre class="fragment">
-              <code class="typescript" data-trim data-line-numbers="1-12|13-27|28-34|35-44|45-53">
+              <code class="typescript" data-trim data-line-numbers="1-12|13-27|28-34|35-44|45-55">
                 <script type="text/template">
                   // Partial changes all the properties 
                   //in an object to be optional
@@ -354,6 +354,140 @@
               </code>
             </pre>
           </section>
+        </section>
+        <section>
+          <section>
+            <h2>OOP in TypeScript</h2>
+            <img src="dist/assets/oop.png" alt="" width="600px" />
+          </section>
+          <section>
+            <h3>Encapsulation</h3>
+            <p class="fragment">
+              TypeScript adds types and visibility modifiers to JavaScript classes
+            </p>
+            <pre class="fragment">
+              <code class="typescript" data-trim data-line-numbers="1-6|7-19">
+                //members of a class (properties & methods) are typed 
+                //using type annotations
+                class Person {
+                  name: string;
+                }
+                const person = new Person();
+
+                //Class members also be given special modifiers 
+                //which affect visibility:
+                //private, protected, public and readonly keyword, 
+                //which can prevent class members from being changed.
+                class Person {
+                  public constructor(private readonly name: string) {}
+
+                  protected getName(): string {
+                    return this.name;
+                  }
+                }
+                const person = new Person("Jane");
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Inheritance</h3>
+            <p class="fragment">
+              Interfaces can be used to define the type a class must follow through the implements
+              keyword. Classes can extend each other through the extends keyword
+            </p>
+            <pre class="fragment">
+              <code class="typescript" data-trim data-line-numbers="1-16|17-24">
+                //Inheritance: Implements
+                interface Shape {
+                  getArea: () => number;
+                }
+
+                class Rectangle implements Shape {
+                  public constructor(
+                    protected readonly width: number, 
+                    protected readonly height: number,
+                  ) {}
+
+                  public getArea(): number {
+                    return this.width * this.height;
+                  }
+                }
+
+                //Inheritance: Extends
+                class Square extends Rectangle {
+                  public constructor(width: number) {
+                    super(width, width);
+                  }
+
+                  // getArea gets inherited from Rectangle
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Polymorphism</h3>
+            <p class="fragment">
+              When a class extends another class, it can replace the members of the parent class
+              with the same name, but we can override this
+            </p>
+            <pre class="fragment">
+              <code class="typescript" data-trim>
+                class Square extends Object {
+                  public constructor(private readonly width: number) {
+                    super();
+                  }
+                
+                  // this toString replaces the toString from Rectangle, 
+                  // but override keyword is optional
+                  public override toString(): string {
+                    return `Square[width=${this.width}]`;
+                  }
+                }
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Static and abstract class</h3>
+            <p class="fragment">
+              TypeScript support static properties that are shared by all instances of the
+              class and abstract modifier that means class cannot be directly
+              instantiated
+            </p>
+            <pre class="fragment">
+              <code class="typescript" data-trim data-line-numbers="1-12|13-25">
+                abstract class Shape {
+                  constructor(
+                    private readonly width: number, 
+                    private readonly height: number
+                  ) {}
+                
+                  getArea() {
+                    return this.width * this.height;
+                  }
+                }
+                //cannot be instantiated
+                const shape = new Shape();
+                
+                class Square extends Shape {
+                  static counter: number = 0;
+                
+                  public constructor(size: number) {
+                    super(size, size);
+                  }
+                }
+                //can be instantiated
+                const square = new Square(5);
+                square.getArea();
+                //static counter is available without instantiation
+                Square.counter;
+              </code>
+            </pre>
+          </section>
+        </section>
+        <section>
+          <h2>That's all for now</h2>
+          <h2>You may know TypeScript better now!</h2>
+          <img src="dist/assets/tsLearn.png" alt="" width="600px" />
         </section>
       </div>
     </div>
