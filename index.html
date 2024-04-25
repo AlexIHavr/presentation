@@ -53,7 +53,7 @@
               kinds of values, making it a static type checker
             </p>
             <pre class="fragment">
-              <code class="language-js">
+              <code class="typescript">
                 const obj = { width: 10, height: 15 }; 
                 const area = obj.width * obj.heigth;
                 /*Property 'heigth' does not exist on type 
@@ -80,21 +80,21 @@
           <section>
             <h3>Primitives</h3>
             <p>They represent values:</p>
-              <ul>
-                <li>string</li>
-                <li>number</li>
-                <li>boolean</li>
-                <li>null</li>
-                <li>undefined</li>
-              </ul>
+            <ul>
+              <li>string</li>
+              <li>number</li>
+              <li>boolean</li>
+              <li>null</li>
+              <li>undefined</li>
+            </ul>
           </section>
           <section>
             <h3>Reference types</h3>
             <p>They represent references to values:</p>
-              <ul style="margin: 0;">
-                <li>object</li>
-                <li>array</li>
-              </ul>
+            <ul style="margin: 0">
+              <li>object</li>
+              <li>array</li>
+            </ul>
           </section>
           <section>
             <h3>Special types</h3>
@@ -105,6 +105,165 @@
               <li><i>unknown</i> represents that any operations will never be performed</li>
               <li><i>never</i> represents safe any type</li>
             </ul>
+          </section>
+          <section>
+            <h3>Type declarations</h3>
+            <p>
+              They can be specified when declaring variables or TypeScript will know (infer) a type
+              automatically
+            </p>
+            <pre class="fragment">
+              <code class="typescript" data-line-numbers="1-8|9-11|12-18">
+                //PRIMITIVES
+                const age: number = 32; //or 
+                const age = 32;
+                const name: string = 'Alice';
+                const loggedIn: boolean = true;
+                const user: null = null;
+                const value: undefined = undefined;
+                //REFERENCE TYPES
+                const names: string[] = [];
+                const todo: { id: number } = { id: 1 };
+                //SPECIAL TYPES
+                const input: any = 5; //or
+                const input: any = 'string';
+                enum Keys { Top, Left };
+                function test(): void {}
+                const data: unknown = {};
+                function error(): never { throw Error(); }
+              </code>
+            </pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Type alias snd interfaces</h2>
+            <img src="dist/assets/typesVSInterfaces.jpg" alt="" width="600px" />
+          </section>
+          <section>
+            <h3>What are type alias?</h3>
+            <p class="fragment">
+              Type Aliases allow defining types with a custom name (key word - type)
+            </p>
+            <pre class="fragment">
+              <code class="typescript">
+                type CarYear = number;
+                type CarModel = string;
+                type Car = {
+                  year: CarYear;
+                  model: CarModel;
+                };
+        
+                const car: Car = {
+                  year: 2001,
+                  model: 'BMW'
+                };
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Union Types</h3>
+            <p class="fragment">
+              Union types are more complex type Aliases and used when a value can be more than a
+              single type.
+            </p>
+            <pre class="fragment">
+              <code class="typescript">
+                type DataValue = string | number; //OR
+
+                type Id = { id: string };
+                type Auth = { isLogined: boolean };
+                type User = Id & Auth; //AND
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Utility Types</h3>
+            <p class="fragment">
+              TypeScript has a large number of types that can help with some common type
+              manipulation, referred to as utility types
+            </p>
+            <pre class="fragment">
+              <code class="typescript" data-trim data-line-numbers="1-12|13-27|28-34|35-44|45-53">
+                <script type="text/template">
+                  // Partial changes all the properties 
+                  //in an object to be optional
+                  type Point = {
+                    x: number;
+                    y: number;
+                  };
+                  const pointPartial: Partial<Point> = {};
+                  //equals
+                  type PointPartial = {
+                    x?: number;
+                    y?: number;
+                  };
+  
+                  // Required changes all the properties 
+                  //in an object to be required
+                  type Car = {
+                    model: string;
+                    speed?: number;
+                  };
+                  let myCar: Required<Car> = {
+                    model: 'BMW',
+                    speed: 10,
+                  };
+                  //equals
+                  type RequiredCar = {
+                    model: string;
+                    speed: number;
+                  };
+  
+                  // Record is a shortcut to defining an object type
+                  // with a specific key type and value type
+                  const names: Record<string, number> = {
+                    Alice: 21,
+                    Bob: 25,
+                  };
+  
+                  //Omit removes keys from an object type.
+                  type Person = {
+                    name: string;
+                    age: number;
+                    place: string;
+                  };
+                  const bob: Omit<Person, 'age' | 'place'> = {
+                    name: 'Bob',
+                  };
+  
+                  //Pick removes all but the specified keys from an object type.
+                  type Person = {
+                    name: string;
+                    age: number;
+                    place?: string;
+                  };
+                  const bob: Pick<Person, 'name'> = {
+                    name: 'Bob',
+                  };</script>
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Interfaces</h3>
+            <p class="fragment">Interfaces are similar to type aliases, except they only apply to object types and can extend each other</p>
+            <pre class="fragment">
+              <code class="typescript">
+                interface Figure {
+                  name: string;
+                }
+                interface Rectangle extends Figure {
+                  height: number,
+                  width: number
+                }
+                
+                const rectangle: Rectangle = {
+                  name: 'rect',
+                  height: 20,
+                  width: 10
+                };
+              </code>
+            </pre>
           </section>
         </section>
       </div>
